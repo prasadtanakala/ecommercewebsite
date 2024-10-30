@@ -1,0 +1,47 @@
+<div class="container">
+    <div >
+        <table>
+            <thead>
+                <tr>
+                    <th>S.no</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cartpage;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.title}}</td>
+                    <td><img src="{{item.image}}"/></td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.numberofitems}}</td>
+                    <td><a class="btn btn-danger" (click)="delete(i)">Delete</a></td>
+                </tr>
+               <tr>
+                <td *ngIf="cartpage.length>0">
+                    <button class="btn btn-info" (click)="  Checkout(0)">CheckOut</button>
+                </td>
+               </tr>
+            </tbody>      
+            </table>
+            
+    </div>
+    <div>
+        <div >
+            <div>
+              <strong>Total prices: </strong> {{totalprice}}
+            </div>
+          </div>
+    </div>
+</div>
+<div>
+    <div>
+        
+<button class="btn btn-primary" [routerLink]="['/homepage']" routerLinkActive="router-link-active" >Go Back HomePage</button>
+    </div>
+</div>

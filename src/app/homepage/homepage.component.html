@@ -1,0 +1,61 @@
+<div class="header bg-light py-3" >
+    <div class="headerContent container d-flex justify-content-between align-items-center">
+        <div>
+            <h4>Ecommerce Website</h4>
+        </div>
+        <div class="flex-grow-1 mx-3">
+            <input type="search" class="form-control" placeholder="Search any Product" [(ngModel)]="searchText" (keyup)="filterData()"/>
+        </div>
+        <div class="font-icons">
+            <i class="bi bi-cart" [routerLink]="['/detailpage']" routerLinkActive="router-link-active">
+                <span>{{data1.length}}</span>
+            </i>
+        </div>
+        <div>
+            <div *ngFor="let item of Data">
+                <p>User: {{item?.name}}</p>
+            </div>
+            <div class="d-flex">
+                <p [routerLink]="['/register']" routerLinkActive="router-link-active" class="text-success mx-2">Register Page</p>
+                <p [routerLink]="['/login']" routerLinkActive="router-link-active" class="text-primary">Login</p>
+            </div>
+        </div>
+    </div>
+</div>
+<section>
+    <div>
+        <div class="loader" *ngIf="isLoading"></div>
+    </div>
+</section>
+<section class="mt-4 container">
+    <p *ngIf="newOne" class="text-danger text-center">Products not found</p>
+    <div class="container text-center mb-3">
+        <button (click)="GetAllProducts()" class="btn btn-primary mx-1">All Products</button>
+        <button (click)="sorting('asc')" class="btn btn-danger mx-1">Highest Price</button>
+        <button (click)="pricesort('dsc')" class="btn btn-primary mx-1">Lowest Price</button>
+        <button (click)="fitlterItem('electronics')" class="btn btn-secondary mx-1">Electronics</button>
+        <button (click)="WomenShoping()" class="btn btn-info mx-1">Women's Clothing</button>
+        <button (click)="MensShopping()" class="btn btn-success mx-1">Men's Clothing</button>
+    </div>
+    <div class="container mt-5" *ngIf="!isLoading">`
+        <div class="row">
+            <ng-container *ngFor="let item of mockData; let i = index">
+                <div class="card col-md-3 mb-4">
+                    <img class="card-img-top" [src]="item.image" alt="Product Image" style="width: 100px;height: 100px;">
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate">Title: {{item.title}}</h5>
+                        <p class="card-text text-truncate">Description: {{item.description}}</p>
+                        <p><strong>Price:</strong> ${{item.price}}</p>
+                        <div class="d-flex align-items-center">
+                            <button (click)="incranddec(item.id, i)" class="btn btn-success me-2">+</button>
+                            <span>{{item.numberofitems}}</span>
+                            <button class="btn btn-danger mx-2" (click)="decrement(item.id, i)">-</button>
+                        </div>
+                        <button class="btn btn-secondary mt-2" (click)="viewpage(item)">View Details</button>
+                        <button class="btn btn-primary mt-2" (click)="addtocart(item)">Add to Cart</button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</section>
